@@ -1,0 +1,24 @@
+Server started on port 8080
+Thread Number: 1
+Client connected: /127.0.0.1
+Shutting down server...
+Server started on port 8080
+Thread Number: 1
+Client connected: /127.0.0.1
+Shutting down server...
+Server started on port 8080
+Thread Number: 1
+Client connected: /127.0.0.1
+Shutting down server...
+Server started on port 8080
+Thread Number: 1
+Client connected: /127.0.0.1
+Shutting down server...
+Server started on port 8080
+Thread Number: 1
+Client connected: /127.0.0.1
+Client connected!
+Received map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080, ##FILENAME##=com/watched_directory/ClientConfig.properties}
+Processing message: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080, ##FILENAME##=com/watched_directory/ClientConfig.properties}
+Message written to: ./store/com_watched_directory_ClientConfig.properties
+Shutting down server...

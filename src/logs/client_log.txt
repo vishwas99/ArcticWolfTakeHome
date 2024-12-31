@@ -1,0 +1,335 @@
+Client configuration loaded:
+Monitored Directory: ./watched_directory
+Key Filter Regex: .*
+Server Address: localhost:8080
+Client configuration loaded:
+Monitored Directory: src/com/watched_directory
+Key Filter Regex: .*
+Server Address: localhost:8080
+Client configuration loaded:
+Monitored Directory: com/watched_directory
+Key Filter Regex: .*
+Server Address: localhost:8080
+Monitoring directory: com/watched_directory
+New file detected: ClientConfig.properties
+Processing file: ClientConfig.properties
+Client configuration loaded:
+Monitored Directory: com/watched_directory
+Key Filter Regex: .*
+Server Address: localhost:8080
+Monitoring directory: com/watched_directory
+New file detected: ClientConfig.properties
+Processing file: ClientConfig.properties
+New file detected: ServerConfig.properties
+Processing file: ServerConfig.properties
+Client configuration loaded:
+Monitored Directory: com/watched_directory
+Key Filter Regex: .*
+Server Address: localhost:8080
+Monitoring directory: com/watched_directory
+New file detected: com/watched_directory/ClientConfig.properties
+Processing file: ClientConfig.properties
+Client configuration loaded:
+Monitored Directory: com/watched_directory
+Key Filter Regex: .*
+Server Address: localhost:8080
+Monitoring directory: com/watched_directory
+New file detected: com/watched_directory/ServerConfig.properties
+Processing file: ServerConfig.properties
+Client configuration loaded:
+Monitored Directory: com/watched_directory
+Key Filter Regex: .*
+Server Address: localhost:8080
+Monitoring directory: com/watched_directory
+New file detected: com/watched_directory/ClientConfig.properties
+Processing file: ClientConfig.properties
+Checking key: server.host
+Checking key: monitored.directory
+Checking key: filter.regex
+Checking key: file.process.interval
+Checking key: server.port
+Filtered properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Sending properties map to server for file: com/watched_directory/ClientConfig.properties
+Properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Connected to the server!
+New file detected: com/watched_directory/ServerConfig.properties
+Processing file: ServerConfig.properties
+Checking key: log.file.path
+Checking key: server.port
+Checking key: store.directory
+Filtered properties map: {log.file.path=./logs/server_logs.txt, server.port=8080, store.directory=./store}
+Sending properties map to server for file: com/watched_directory/ServerConfig.properties
+Properties map: {log.file.path=./logs/server_logs.txt, server.port=8080, store.directory=./store}
+Connected to the server!
+New file detected: com/watched_directory/ClientConfig.properties
+Processing file: ClientConfig.properties
+Checking key: server.host
+Checking key: monitored.directory
+Checking key: filter.regex
+Checking key: file.process.interval
+Checking key: server.port
+Filtered properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Sending properties map to server for file: com/watched_directory/ClientConfig.properties
+Properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+New file detected: com/watched_directory/ServerConfig.properties
+Processing file: ServerConfig.properties
+Checking key: log.file.path
+Checking key: server.port
+Checking key: store.directory
+Filtered properties map: {log.file.path=./logs/server_logs.txt, server.port=8080, store.directory=./store}
+Sending properties map to server for file: com/watched_directory/ServerConfig.properties
+Properties map: {log.file.path=./logs/server_logs.txt, server.port=8080, store.directory=./store}
+Connected to the server!
+New file detected: com/watched_directory/ClientConfig.properties
+Processing file: ClientConfig.properties
+Checking key: server.host
+Checking key: monitored.directory
+Checking key: filter.regex
+Checking key: file.process.interval
+Checking key: server.port
+Filtered properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Sending properties map to server for file: com/watched_directory/ClientConfig.properties
+Properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Connected to the server!
+New file detected: com/watched_directory/ClientConfig.properties
+Processing file: ClientConfig.properties
+Checking key: server.host
+Checking key: monitored.directory
+Checking key: filter.regex
+Checking key: file.process.interval
+Checking key: server.port
+Filtered properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Sending properties map to server for file: com/watched_directory/ClientConfig.properties
+Properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+New file detected: com/watched_directory/ClientConfig.properties
+Processing file: ClientConfig.properties
+Checking key: server.host
+Checking key: monitored.directory
+Checking key: filter.regex
+Checking key: file.process.interval
+Checking key: server.port
+Filtered properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Sending properties map to server for file: com/watched_directory/ClientConfig.properties
+Properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Connected to the server!
+Received from server: null
+New file detected: com/watched_directory/ServerConfig.properties
+Processing file: ServerConfig.properties
+Checking key: log.file.path
+Checking key: server.port
+Checking key: store.directory
+Filtered properties map: {log.file.path=/logs/server_logs.txt, server.port=8080, store.directory=com/store}
+Sending properties map to server for file: com/watched_directory/ServerConfig.properties
+Properties map: {log.file.path=/logs/server_logs.txt, server.port=8080, store.directory=com/store}
+Connected to the server!
+Received from server: null
+Client configuration loaded:
+Monitored Directory: com/watched_directory
+Key Filter Regex: .*
+Server Address: localhost:8080
+Monitoring directory: com/watched_directory
+New file detected: com/watched_directory/ClientConfig.properties
+Processing file: ClientConfig.properties
+Checking key: server.host
+Checking key: monitored.directory
+Checking key: filter.regex
+Checking key: file.process.interval
+Checking key: server.port
+Filtered properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Sending properties map to server for file: com/watched_directory/ClientConfig.properties
+Properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Connected to the server!
+Received from server: null
+Client configuration loaded:
+Monitored Directory: com/watched_directory
+Key Filter Regex: .*
+Server Address: localhost:8080
+Monitoring directory: com/watched_directory
+New file detected: com/watched_directory/ServerConfig.properties
+Processing file: ServerConfig.properties
+Checking key: log.file.path
+Checking key: server.port
+Checking key: store.directory
+Filtered properties map: {log.file.path=/logs/server_logs.txt, server.port=8080, store.directory=com/store}
+Sending properties map to server for file: com/watched_directory/ServerConfig.properties
+Properties map: {log.file.path=/logs/server_logs.txt, server.port=8080, store.directory=com/store}
+Connected to the server!
+Received from server: null
+New file detected: com/watched_directory/ServerConfig.properties
+Processing file: ServerConfig.properties
+Checking key: log.file.path
+Checking key: server.port
+Checking key: store.directory
+Filtered properties map: {log.file.path=/logs/server_logs.txt, server.port=8080, store.directory=com/store}
+Sending properties map to server for file: com/watched_directory/ServerConfig.properties
+Properties map: {log.file.path=/logs/server_logs.txt, server.port=8080, store.directory=com/store}
+Connected to the server!
+Received from server: null
+New file detected: com/watched_directory/ClientConfig.properties
+Processing file: ClientConfig.properties
+Checking key: server.host
+Checking key: monitored.directory
+Checking key: filter.regex
+Checking key: file.process.interval
+Checking key: server.port
+Filtered properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Sending properties map to server for file: com/watched_directory/ClientConfig.properties
+Properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Connected to the server!
+Received from server: null
+New file detected: com/watched_directory/ClientConfig.properties
+Processing file: ClientConfig.properties
+Checking key: server.host
+Checking key: monitored.directory
+Checking key: filter.regex
+Checking key: file.process.interval
+Checking key: server.port
+Filtered properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Sending properties map to server for file: com/watched_directory/ClientConfig.properties
+Properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Connected to the server!
+Received from server: null
+New file detected: com/watched_directory/ServerConfig.properties
+Processing file: ServerConfig.properties
+Checking key: log.file.path
+Checking key: server.port
+Checking key: store.directory
+Checking key: Thread
+Filtered properties map: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, Thread=Number: 1}
+Sending properties map to server for file: com/watched_directory/ServerConfig.properties
+Properties map: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, Thread=Number: 1}
+Connected to the server!
+Received from server: null
+New file detected: com/watched_directory/ServerConfig.properties
+Processing file: ServerConfig.properties
+Checking key: log.file.path
+Checking key: server.port
+Checking key: store.directory
+Checking key: Thread
+Filtered properties map: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, Thread=Number: 1}
+Sending properties map to server for file: com/watched_directory/ServerConfig.properties
+Properties map: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, Thread=Number: 1}
+Connected to the server!
+Received from server: null
+Client configuration loaded:
+Monitored Directory: com/watched_directory
+Key Filter Regex: .*
+Server Address: localhost:8080
+Monitoring directory: com/watched_directory
+Client configuration loaded:
+Monitored Directory: com/watched_directory
+Key Filter Regex: .*
+Server Address: localhost:8080
+Monitoring directory: com/watched_directory
+New file detected: com/watched_directory/ClientConfig.properties
+Processing file: ClientConfig.properties
+Checking key: server.host
+Checking key: monitored.directory
+Checking key: filter.regex
+Checking key: file.process.interval
+Checking key: server.port
+Filtered properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Sending properties map to server for file: com/watched_directory/ClientConfig.properties
+Properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Connected to the server!
+Received from server: null
+Client configuration loaded:
+Monitored Directory: com/watched_directory
+Key Filter Regex: .*
+Server Address: localhost:8080
+Monitoring directory: com/watched_directory
+New file detected: com/watched_directory/ServerConfig.properties
+Processing file: ServerConfig.properties
+Checking key: log.file.path
+Checking key: server.port
+Checking key: store.directory
+Checking key: Thread
+Filtered properties map: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, Thread=Number: 1}
+Sending properties map to server for file: com/watched_directory/ServerConfig.properties
+Properties map: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, Thread=Number: 1}
+Connected to the server!
+Received from server: null
+New file detected: com/watched_directory/ServerConfig.properties
+Processing file: ServerConfig.properties
+Checking key: log.file.path
+Checking key: server.port
+Checking key: store.directory
+Checking key: Thread
+Filtered properties map: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, Thread=Number: 1}
+Sending properties map to server for file: com/watched_directory/ServerConfig.properties
+Properties map: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, Thread=Number: 1}
+Connected to the server!
+Received from server: null
+New file detected: com/watched_directory/ClientConfig.properties
+Processing file: ClientConfig.properties
+Checking key: server.host
+Checking key: monitored.directory
+Checking key: filter.regex
+Checking key: file.process.interval
+Checking key: server.port
+Filtered properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Sending properties map to server for file: com/watched_directory/ClientConfig.properties
+Properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Connected to the server!
+Received from server: null
+Client configuration loaded:
+Monitored Directory: com/watched_directory
+Key Filter Regex: .*
+Server Address: localhost:8080
+Monitoring directory: com/watched_directory
+New file detected: com/watched_directory/ServerConfig.properties
+Processing file: ServerConfig.properties
+Checking key: Message
+Checking key: log.file.path
+Checking key: Received
+Checking key: server.port
+Checking key: store.directory
+Checking key: Shutting
+Checking key: Client
+Checking key: Thread
+Checking key: Processing
+Filtered properties map: {Message=written to: com/store/ServerConfig.properties, log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, Received=map: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, ##FILENAME##=ServerConfig.properties, Thread=Number: 1}, server.port=8080, store.directory=com/store, Shutting=down server..., Client=connected!, Thread=Number: 1, Processing=message: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, ##FILENAME##=ServerConfig.properties, Thread=Number: 1}}
+Sending properties map to server for file: com/watched_directory/ServerConfig.properties
+Properties map: {Message=written to: com/store/ServerConfig.properties, log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, Received=map: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, ##FILENAME##=ServerConfig.properties, Thread=Number: 1}, server.port=8080, store.directory=com/store, Shutting=down server..., Client=connected!, Thread=Number: 1, Processing=message: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, ##FILENAME##=ServerConfig.properties, Thread=Number: 1}}
+Connected to the server!
+Received from server: null
+New file detected: com/watched_directory/ServerConfig.properties
+Processing file: ServerConfig.properties
+Checking key: Message
+Checking key: log.file.path
+Checking key: Received
+Checking key: server.port
+Checking key: store.directory
+Checking key: Shutting
+Checking key: Client
+Checking key: Thread
+Checking key: Processing
+Filtered properties map: {Message=written to: com/store/ServerConfig.properties, log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, Received=map: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, ##FILENAME##=ServerConfig.properties, Thread=Number: 1}, server.port=8080, store.directory=com/store, Shutting=down server..., Client=connected!, Thread=Number: 1, Processing=message: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, ##FILENAME##=ServerConfig.properties, Thread=Number: 1}}
+Sending properties map to server for file: com/watched_directory/ServerConfig.properties
+Properties map: {Message=written to: com/store/ServerConfig.properties, log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, Received=map: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, ##FILENAME##=ServerConfig.properties, Thread=Number: 1}, server.port=8080, store.directory=com/store, Shutting=down server..., Client=connected!, Thread=Number: 1, Processing=message: {log.file.path=/Users/khkarana/Desktop/Prep/ArcticWolf/Assignment/src/com/resources/ServerConfig.propertiesServer started on port 8080, server.port=8080, store.directory=com/store, ##FILENAME##=ServerConfig.properties, Thread=Number: 1}}
+Connected to the server!
+Received from server: null
+New file detected: com/watched_directory/ClientConfig.properties
+Processing file: ClientConfig.properties
+Checking key: server.host
+Checking key: monitored.directory
+Checking key: filter.regex
+Checking key: file.process.interval
+Checking key: server.port
+Filtered properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Sending properties map to server for file: com/watched_directory/ClientConfig.properties
+Properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Connected to the server!
+Received from server: null
+New file detected: com/watched_directory/ClientConfig.properties
+Processing file: ClientConfig.properties
+Checking key: server.host
+Checking key: monitored.directory
+Checking key: filter.regex
+Checking key: file.process.interval
+Checking key: server.port
+Filtered properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Sending properties map to server for file: com/watched_directory/ClientConfig.properties
+Properties map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080}
+Connected to the server!
+Received from server: null

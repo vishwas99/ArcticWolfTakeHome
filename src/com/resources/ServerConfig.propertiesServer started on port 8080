@@ -1,0 +1,13 @@
+Client connected: /127.0.0.1
+Client connected!
+Received map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080, ##FILENAME##=ClientConfig.properties}
+Processing message: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080, ##FILENAME##=ClientConfig.properties}
+Message written to: com/store/ClientConfig.properties
+Client disconnected. Active thread count: 2
+Client connected: /127.0.0.1
+Client connected!
+Received map: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080, ##FILENAME##=ClientConfig.properties}
+Processing message: {server.host=localhost, monitored.directory=com/watched_directory, filter.regex=.*, file.process.interval=5000, server.port=8080, ##FILENAME##=ClientConfig.properties}
+Message written to: com/store/ClientConfig.properties
+Client disconnected. Active thread count: 2
+Shutting down server...
