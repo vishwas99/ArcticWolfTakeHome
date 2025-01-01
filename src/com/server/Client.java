@@ -93,35 +93,6 @@ public class Client {
                     return;
                 }
 
-                // // Process the events for the key
-                // for (WatchEvent<?> event : key.pollEvents()) {
-                // // Get event type (only ENTRY_CREATE for now)
-                // WatchEvent.Kind<?> kind = event.kind();
-
-                // // If a file is created
-                // if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-                // // Get the file name from the event
-                // Path filePath = (Path) event.context();
-                // Path fullFilePath = monitoredPath.resolve(filePath);
-                // System.out.println("fullFilePath: " + fullFilePath);
-                // logToFile("New file detected: " + fullFilePath, config);
-
-                // // Only process if it’s a .properties file
-                // if (filePath.toString().endsWith(".properties")) {
-                // logToFile("Processing file: " + filePath, config);
-
-                // // Add your file processing logic here, e.g., loading the file, filtering
-                // keys, etc.
-                // propertiesMapMaker(fullFilePath, filterRegex, config, filePath.toString());
-                // try {
-                // Thread.sleep(fileProcessInterval);
-                // } catch (InterruptedException e) {
-                // e.printStackTrace();
-                // }
-                // }
-                // }
-                // }
-
                 processWatchKey(key, monitoredPath, filterRegex, config, fileProcessInterval);
 
                 // Reset the key to continue watching for events
