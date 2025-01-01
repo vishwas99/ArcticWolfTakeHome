@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -49,7 +50,8 @@ public class ServerLogic implements Runnable {
             logToFile("Received map: " + map);
 
             // Process the Map
-            processClientMessage(map);
+            boolean processSuccess = processClientMessage(map);
+            sendAcknowledgment(processSuccess, map.get("##FILENAME##"));
             
         } finally {
             // Close the client socket after the operation
@@ -57,76 +59,71 @@ public class ServerLogic implements Runnable {
         }
     }
 
-    private void processClientMessage(Map<String, String> message) {
+    private boolean processClientMessage(Map<String, String> message) {
         // Process the message received from the client
         logToFile("Processing message: " + message);
-
-        // Convert map to propterties
+    
         Properties messageProps = new Properties();
         messageProps.putAll(message);
-        // Get file name from message
+    
         String propFileName = message.get("##FILENAME##");
-        messageProps.remove("##FILENAME##"); // Remove FILENAME from Props
-
-        propFileName = propFileName.replaceAll("[\\\\/:*?\"<>|]", "_"); // Replace invalid characters
-
+        messageProps.remove("##FILENAME##"); // Remove FILENAME from properties
+    
         if (propFileName == null || propFileName.isBlank()) {
             logToFile("Error: Received message missing file name.");
-            return;
+            return false;
         }
-
-
-        // Write the properties to a file
+    
+        // Sanitize the file name
+        propFileName = propFileName.replaceAll("[\\\\/:*?\"<>|]", "_");
+    
         try {
-            // Create path to store the File
+            // Construct the file path
             Path messagePath = Paths.get(this.config.getProperty("store.directory"), propFileName);
-            // Directory creation if not exists
+    
+            // Ensure the parent directory exists
             if (!Files.exists(messagePath.getParent())) {
                 Files.createDirectories(messagePath.getParent());
             }
+    
             Properties existingProps = new Properties();
             if (Files.exists(messagePath)) {
                 existingProps.load(Files.newBufferedReader(messagePath, StandardCharsets.UTF_8));
             }
-             // If backup.file is true then save this file/create to backup folder inside the store.directory
-            if (Boolean.parseBoolean(this.config.getProperty("backup.file", "false"))) {
-                logToFile("backing up the file: " + messagePath);
-                Path backupPath = Paths.get(this.config.getProperty("store.directory"), "backup", propFileName);
-                // Add _backup to the filename
-                backupPath = backupPath.resolveSibling(this.BACKUP_PREFIX + backupPath.getFileName().toString());
-                logToFile("Backup path: " + backupPath);
-                // Directory creation if not exists
-                if (!Files.exists(backupPath.getParent())) {
-                    Files.createDirectories(backupPath.getParent());
+    
+            // Handle backup if the file exists and backup.file is true
+            if (Files.exists(messagePath) && Boolean.parseBoolean(this.config.getProperty("backup.file", "false"))) {
+                logToFile("Backing up the file: " + messagePath);
+                Path backupDir = Paths.get(this.config.getProperty("store.directory"), "backup");
+                if (!Files.exists(backupDir)) {
+                    Files.createDirectories(backupDir);
                 }
-                // Copy the file to backup location
-                logToFile(propFileName + " exists. Moving to backup location: " + backupPath);
+                String backupFileName = String.format("%d_backup_%s", System.currentTimeMillis(), propFileName);
+                Path backupPath = backupDir.resolve(backupFileName);
                 Files.move(messagePath, backupPath, StandardCopyOption.REPLACE_EXISTING);
+                logToFile("File moved to backup location: " + backupPath);
             }
-            // Store the properties with propFileName as filename
-
-            // Check if append.to.file prop is set to true
-            if (Boolean.parseBoolean(this.config.getProperty("append.to.file", "false"))) {
+    
+            // Append or overwrite based on config
+            if (Boolean.parseBoolean(this.config.getProperty("append.to.file", "true"))) {
                 logToFile("Appending to file: " + messagePath);
-                logToFile("Before merge: ");
-                logToFile(existingProps.toString());
-                logToFile("After merge: ");
+                logToFile("Existing properties before merge: " + existingProps);
                 existingProps.putAll(messageProps);
-                logToFile(existingProps.toString());
-                // Write the merged properties back to the file
+                logToFile("Merged properties: " + existingProps);
                 existingProps.store(Files.newBufferedWriter(messagePath, StandardCharsets.UTF_8), "Appended properties");
-            } else{
-                // Overwrite the file
-                logToFile("Writing or overwriting to file: " + messagePath);
+            } else {
+                logToFile("Overwriting file: " + messagePath);
                 messageProps.store(Files.newBufferedWriter(messagePath, StandardCharsets.UTF_8), "New Properties");
             }
-
-            logToFile("Message written to: " + messagePath);
+    
+            logToFile("Message successfully processed and written to: " + messagePath);
+            return true;
+    
         } catch (IOException e) {
-            System.err.println("Error writing message: " + e.getMessage());
+            logToFile("Error writing message to file: " + e.getMessage());
+            return false;
         }
-
-    }
+    }    
 
      private void logToFile(String message) {
         System.out.println(message);
@@ -137,6 +134,17 @@ public class ServerLogic implements Runnable {
             writer.newLine();
         } catch (IOException e) {
             System.err.println("Error writing to log file: " + e.getMessage());
+        }
+    }
+
+    private void sendAcknowledgment(boolean success, String propFileName) {
+        try (PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
+            // Build acknowledgment message
+            String acknowledgment = propFileName + "=" + (success ? "Success" : "Failure");
+            logToFile("Sending acknowledgment: " + acknowledgment);
+            out.println(acknowledgment);  // Send acknowledgment to client
+        } catch (IOException e) {
+            logToFile("Error sending acknowledgment: " + e.getMessage());
         }
     }
 
