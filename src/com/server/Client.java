@@ -52,14 +52,20 @@ public class Client {
 
         // Read configuration values
         String monitoredDirectory = config.getProperty("monitored.directory");
-        String filterRegex = config.getProperty("filter.regex");
-        String serverHost = config.getProperty("server.host");
-        int fileProcessInterval = Integer.parseInt(config.getProperty("file.process.interval"));
 
         if (monitoredDirectory == null || monitoredDirectory.isBlank()) {
-            System.err.println("Configuration key 'store.directory' is missing. Please update the config file.");
+            System.err.println("Missing 'monitored.directory' in configuration. Exiting.");
             return;
         }
+
+        String filterRegex = config.getProperty("filter.regex" , ".*");
+        if (!isValidRegex(filterRegex)) {
+            System.err.println("Invalid 'filter.regex' in configuration. Exiting.");
+            return;
+        }
+
+        String serverHost = config.getProperty("server.host");
+        int fileProcessInterval = Integer.parseInt(config.getProperty("file.process.interval", "0"));
 
         logToFile("Client configuration loaded:", config);
         logToFile("Monitored Directory: " + monitoredDirectory, config);
@@ -86,33 +92,35 @@ public class Client {
                     return;
                 }
 
-                // Process the events for the key
-                for (WatchEvent<?> event : key.pollEvents()) {
-                    // Get event type (only ENTRY_CREATE for now)
-                    WatchEvent.Kind<?> kind = event.kind();
+                // // Process the events for the key
+                // for (WatchEvent<?> event : key.pollEvents()) {
+                //     // Get event type (only ENTRY_CREATE for now)
+                //     WatchEvent.Kind<?> kind = event.kind();
 
-                    // If a file is created
-                    if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
-                        // Get the file name from the event
-                        Path filePath = (Path) event.context();
-                        Path fullFilePath = monitoredPath.resolve(filePath);
-                        System.out.println("fullFilePath: " + fullFilePath);
-                        logToFile("New file detected: " + fullFilePath, config);
+                //     // If a file is created
+                //     if (kind == StandardWatchEventKinds.ENTRY_CREATE) {
+                //         // Get the file name from the event
+                //         Path filePath = (Path) event.context();
+                //         Path fullFilePath = monitoredPath.resolve(filePath);
+                //         System.out.println("fullFilePath: " + fullFilePath);
+                //         logToFile("New file detected: " + fullFilePath, config);
 
-                        // Only process if it’s a .properties file
-                        if (filePath.toString().endsWith(".properties")) {
-                            logToFile("Processing file: " + filePath, config);
+                //         // Only process if it’s a .properties file
+                //         if (filePath.toString().endsWith(".properties")) {
+                //             logToFile("Processing file: " + filePath, config);
 
-                            // Add your file processing logic here, e.g., loading the file, filtering keys, etc.
-                            propertiesMapMaker(fullFilePath, filterRegex, config, filePath.toString());
-                            try {
-                                Thread.sleep(fileProcessInterval);
-                            } catch (InterruptedException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                }
+                //             // Add your file processing logic here, e.g., loading the file, filtering keys, etc.
+                //             propertiesMapMaker(fullFilePath, filterRegex, config, filePath.toString());
+                //             try {
+                //                 Thread.sleep(fileProcessInterval);
+                //             } catch (InterruptedException e) {
+                //                 e.printStackTrace();
+                //             }
+                //         }
+                //     }
+                // }
+
+                processWatchKey(key, monitoredPath, filterRegex, config, fileProcessInterval);
 
                 // Reset the key to continue watching for events
                 boolean valid = key.reset();
@@ -122,10 +130,28 @@ public class Client {
                 }
             }
 
-        }catch (IOException e){
+        }catch (IOException | InterruptedException e){
             e.printStackTrace();
             System.err.println("Error setting up directory watcher: " + e.getMessage());
         }
+    }
+
+    private static void processWatchKey(WatchKey key, Path monitoredPath, String filterRegex, Properties config, int interval) throws InterruptedException {
+        for (WatchEvent<?> event : key.pollEvents()) {
+            if (event.kind() == StandardWatchEventKinds.ENTRY_CREATE) {
+                // Path filePath = monitoredPath.resolve((Path) event.context());
+                Path filePath = (Path) event.context();
+                Path fullFilePath = monitoredPath.resolve(filePath);
+                logToFile("New file detected: " + filePath, config);
+
+                if (filePath.toString().endsWith(".properties")) {
+                    logToFile("Processing file: " + filePath, config);
+                    propertiesMapMaker(fullFilePath, filterRegex, config, filePath.toString());
+                    Thread.sleep(interval);
+                }
+            }
+        }
+        key.reset();
     }
 
     private static void propertiesMapMaker(Path filePath, String filterRegex, Properties config, String fileNameForServer) {
@@ -202,6 +228,15 @@ public class Client {
             writer.newLine();
         } catch (IOException e) {
             System.err.println("Error writing to log file: " + e.getMessage());
+        }
+    }
+
+    private static boolean isValidRegex(String regex) {
+        try {
+            Pattern.compile(regex);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }
