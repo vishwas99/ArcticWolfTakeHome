@@ -105,6 +105,11 @@ public class Client {
 
                             // Add your file processing logic here, e.g., loading the file, filtering keys, etc.
                             propertiesMapMaker(fullFilePath, filterRegex, config, filePath.toString());
+                            try {
+                                Thread.sleep(fileProcessInterval);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
                         }
                     }
                 }
