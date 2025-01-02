@@ -11,6 +11,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Properties;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ServerThreader extends Thread {
     public static void main(String[] args) {
@@ -44,7 +46,9 @@ public class ServerThreader extends Thread {
 
         // If port is not provided in Config it will be defaulted to 8080
         int port = config.getProperty("server.port") != null ? Integer.parseInt(config.getProperty("server.port")) : 8080;
-        
+        int threadPoolLimit = config.getProperty("thread.pool.limit") != null ? Integer.parseInt(config.getProperty("thread.pool.limit")) : 4;
+        ExecutorService threadPool = Executors.newFixedThreadPool(threadPoolLimit); // Added
+
 
         // Create a server Socket
         try (ServerSocket serverSocket = new ServerSocket(port)){
@@ -61,11 +65,16 @@ public class ServerThreader extends Thread {
                 Socket clientSocket = serverSocket.accept();
                 logToFile("Client connected: " + clientSocket.getInetAddress(), config);
 
-                // Create a new thread to handle the client
-                Thread clientThread = new Thread(new ServerLogic(clientSocket, config));
-                clientThread.start(); // Start the client handler thread
+                // // Create a new thread to handle the client
+                // Thread clientThread = new Thread(new ServerLogic(clientSocket, config));
+                // clientThread.start(); // Start the client handler thread
+
+                // Submit the client task to the thread pool
+                threadPool.submit(new ServerLogic(clientSocket, config));
+
                 // timeout for 5 secs testing
-                Thread.sleep(10000);
+
+                Thread.sleep(0);
             }
 
         }catch (IOException | InterruptedException e) {

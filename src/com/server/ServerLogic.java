@@ -6,11 +6,14 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
@@ -97,39 +100,42 @@ public class ServerLogic implements Runnable {
                 Files.createDirectories(messagePath.getParent());
             }
 
-            Properties existingProps = new Properties();
-            if (Files.exists(messagePath)) {
-                existingProps.load(Files.newBufferedReader(messagePath, StandardCharsets.UTF_8));
-            }
-
-            // Handle backup if the file exists and backup.file is true
-            if (Files.exists(messagePath) && Boolean.parseBoolean(this.config.getProperty("backup.file", "false"))) {
-                logToFile("Backing up the file: " + messagePath);
-                Path backupDir = Paths.get(this.config.getProperty("store.directory"), "backup");
-                if (!Files.exists(backupDir)) {
-                    Files.createDirectories(backupDir);
+            try (FileChannel fileChannel = FileChannel.open(messagePath, StandardOpenOption.WRITE, StandardOpenOption.CREATE)){
+                FileLock lock = fileChannel.lock(); 
+                Properties existingProps = new Properties();
+                if (Files.exists(messagePath)) {
+                    existingProps.load(Files.newBufferedReader(messagePath, StandardCharsets.UTF_8));
                 }
-                String backupFileName = String.format("%d_backup_%s", System.currentTimeMillis(), propFileName);
-                Path backupPath = backupDir.resolve(backupFileName);
-                Files.move(messagePath, backupPath, StandardCopyOption.REPLACE_EXISTING);
-                logToFile("File moved to backup location: " + backupPath);
-            }
 
-            // Append or overwrite based on config
-            if (Boolean.parseBoolean(this.config.getProperty("append.to.file", "true"))) {
-                logToFile("Appending to file: " + messagePath);
-                logToFile("Existing properties before merge: " + existingProps);
-                existingProps.putAll(messageProps);
-                logToFile("Merged properties: " + existingProps);
-                existingProps.store(Files.newBufferedWriter(messagePath, StandardCharsets.UTF_8),
-                        "Appended properties");
-            } else {
-                logToFile("Overwriting file: " + messagePath);
-                messageProps.store(Files.newBufferedWriter(messagePath, StandardCharsets.UTF_8), "New Properties");
-            }
+                // Handle backup if the file exists and backup.file is true
+                if (Files.exists(messagePath) && Boolean.parseBoolean(this.config.getProperty("backup.file", "false"))) {
+                    logToFile("Backing up the file: " + messagePath);
+                    Path backupDir = Paths.get(this.config.getProperty("store.directory"), "backup");
+                    if (!Files.exists(backupDir)) {
+                        Files.createDirectories(backupDir);
+                    }
+                    String backupFileName = String.format("%d"+BACKUP_PREFIX+"%s", System.currentTimeMillis(), propFileName);
+                    Path backupPath = backupDir.resolve(backupFileName);
+                    Files.move(messagePath, backupPath, StandardCopyOption.REPLACE_EXISTING);
+                    logToFile("File moved to backup location: " + backupPath);
+                }
 
-            logToFile("Message successfully processed and written to: " + messagePath);
-            return true;
+                // Append or overwrite based on config
+                if (Boolean.parseBoolean(this.config.getProperty("append.to.file", "true"))) {
+                    logToFile("Appending to file: " + messagePath);
+                    logToFile("Existing properties before merge: " + existingProps);
+                    existingProps.putAll(messageProps);
+                    logToFile("Merged properties: " + existingProps);
+                    existingProps.store(Files.newBufferedWriter(messagePath, StandardCharsets.UTF_8),
+                            "Appended properties");
+                } else {
+                    logToFile("Overwriting file: " + messagePath);
+                    messageProps.store(Files.newBufferedWriter(messagePath, StandardCharsets.UTF_8), "New Properties");
+                }
+                logToFile("Message successfully processed and written to: " + messagePath);
+                lock.release();
+                return true;
+            }
 
         } catch (IOException e) {
             logToFile("Error writing message to file: " + e.getMessage());
