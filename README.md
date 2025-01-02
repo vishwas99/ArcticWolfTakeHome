@@ -45,4 +45,31 @@ Client program works similar to Server Program, Config File should be passed as 
 
 log.file.path can be provided in config file for both server and client, 2 text files, one for each Server and Client will be created here and logs are written to the files for debugging purposed(Logs are printed to console aswell for ease of use).
 
-Note: There is thread Limit of 4 coded in the Server, This can be modified in the source code considering performance limitation of the source system.
+## Acknowledgement Mode for Secure File transfer
+
+For handling a high volume client for a more secure file transfer method, Acknowledgement mode is created
+
+- Server can run on 2 modes based ack.mode property, If false, The above process will take place, If true then Server will look for ack.port propert in the server.config file(Defaults to 9090). 
+- If ack.mode is true, Then after processing the message, Instead of sending acknowledgemnent to same socket/port it will be sent to ack.port
+
+- Client will be having 2 Threads, 
+    - Thread 1 is the watcher responsible for Watching for Creation Event in Directory and Sending file to Server
+    - Thread 2 is the Listener, This will be running on a port(ack.port) and listens to any acknowledgemnt from Server
+    - If received the file will be deleted
+
+This enables for Much Faster and Secure file transfer between a Client and Server.
+
+### How to Run
+
+1. In Server Config file provide following Properties and Start the same way we previously did.
+
+    `ack.port=9090
+     ack.mode=true`
+
+2. There is a package called multiClient inside out main Server Package, This contains ClientThreader, WatcherRunnable, ClientListener
+3. Please run ClientThreader with following command
+
+    ### Use following command to start the Acknowledgement Client (Make sure you are in src directory, `cd src`)
+    `java com.server.multiClient.ClientThreader com/resources/ClientConfig.properties`
+
+Note: There is thread Limit of 4 coded in the Server considering performance limitation of the source system, This can be modified in the source code .

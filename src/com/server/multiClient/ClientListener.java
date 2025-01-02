@@ -1,4 +1,4 @@
-package com.server;
+package com.server.multiClient;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

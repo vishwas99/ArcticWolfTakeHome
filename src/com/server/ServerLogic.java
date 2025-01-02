@@ -59,8 +59,13 @@ public class ServerLogic implements Runnable {
             // Process the Map
             boolean processSuccess = processClientMessage(map);
             // Acknowledgement mode where the server sends an acknowledgment to the client on ack.port
-            // sendAcknowledgmentToAckPort(processSuccess, map.get("##FILENAME##"));
-            sendAcknowledgment(processSuccess, map.get("##FILENAME##"));
+            boolean ackMode = Boolean.parseBoolean(config.getProperty("ack.mode", "false"));
+            if(ackMode) {
+                sendAcknowledgmentToAckPort(processSuccess, map.get("##FILENAME##"));
+            }else{
+                sendAcknowledgment(processSuccess, map.get("##FILENAME##"));
+            }
+           
 
         }
     }
