@@ -24,11 +24,9 @@ Server Contains 2 main Classes
  - backup.file is provided to make sure that if same file is being processed again then older version of it is timestamped and is backed up safely
  - A folder name 'backup' is created in the store.directory folder and files are saved in this format
 
- `1735751399317_backup_FaultyTest2.properties`
+        `1735751399317_backup_FaultyTest2.properties`
 
  - Server User blocking file locks to handle multiple client updates on same file, If File already exist in the Dir then its locked till processing is completed.
-
-   
 
 
 ## Client
@@ -77,3 +75,53 @@ This enables for Much Faster and Secure file transfer between a Client and Serve
     `java com.server.multiClient.ClientThreader com/resources/ClientConfig.properties`
 
 Note: There is thread Limit of 4 coded in the Server considering performance limitation of the source system, This can be modified in the source code .
+
+## Project Structure
+
+.
+├── README.md
+├── src
+│   ├── bin
+│   ├── com
+│   │   ├── failed_directory
+│   │   │   ├── FaultyTest.properties
+│   │   │   ├── FaultyTest2.properties
+│   │   │   └── SpecialChars.properties
+│   │   ├── lib
+│   │   │   ├── junit-4.13.2.jar
+│   │   │   └── mockito-all-1.10.19.jar
+│   │   ├── resources
+│   │   │   ├── BasicTest.properties
+│   │   │   ├── ClientConfig.properties
+│   │   │   ├── ClientConfig2.properties
+│   │   │   ├── FaultyTest.properties
+│   │   │   ├── FaultyTest2.properties
+│   │   │   ├── ServerConfig.properties
+│   │   │   └── SpecialChars.properties
+│   │   ├── server
+│   │   │   ├── Client.class
+│   │   │   ├── Client.java
+│   │   │   ├── ServerLogic.class
+│   │   │   ├── ServerLogic.java
+│   │   │   ├── ServerThreader.class
+│   │   │   ├── ServerThreader.java
+│   │   │   └── multiClient
+│   │   │       ├── ClientListener.class
+│   │   │       ├── ClientListener.java
+│   │   │       ├── ClientThreader.class
+│   │   │       ├── ClientThreader.java
+│   │   │       ├── WatcherRunnable.class
+│   │   │       └── WatcherRunnable.java
+│   │   ├── store
+│   │   │   ├── FaultyTest2.properties
+│   │   │   └── backup
+│   │   │       ├── 1735751399317_backup_FaultyTest2.properties
+│   │   │       ├── 1735751418323_backup_FaultyTest2.properties
+│   │   │       └── 1735752107778_backup_SpecialChars.properties
+│   │   └── watched_directory
+│   ├── failed
+│   │   └── BasicTest.properties
+│   └── logs
+│       ├── client_log.txt
+│       └── server_logs.txt
+└── watch_dir_2
