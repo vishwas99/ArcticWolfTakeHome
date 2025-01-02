@@ -76,52 +76,11 @@ This enables for Much Faster and Secure file transfer between a Client and Serve
 
 Note: There is thread Limit of 4 coded in the Server considering performance limitation of the source system, This can be modified in the source code .
 
-## Project Structure
+Run following commands from src directory to compile java programs in case of code changes
 
-.
-├── README.md
-├── src
-│   ├── bin
-│   ├── com
-│   │   ├── failed_directory
-│   │   │   ├── FaultyTest.properties
-│   │   │   ├── FaultyTest2.properties
-│   │   │   └── SpecialChars.properties
-│   │   ├── lib
-│   │   │   ├── junit-4.13.2.jar
-│   │   │   └── mockito-all-1.10.19.jar
-│   │   ├── resources
-│   │   │   ├── BasicTest.properties
-│   │   │   ├── ClientConfig.properties
-│   │   │   ├── ClientConfig2.properties
-│   │   │   ├── FaultyTest.properties
-│   │   │   ├── FaultyTest2.properties
-│   │   │   ├── ServerConfig.properties
-│   │   │   └── SpecialChars.properties
-│   │   ├── server
-│   │   │   ├── Client.class
-│   │   │   ├── Client.java
-│   │   │   ├── ServerLogic.class
-│   │   │   ├── ServerLogic.java
-│   │   │   ├── ServerThreader.class
-│   │   │   ├── ServerThreader.java
-│   │   │   └── multiClient
-│   │   │       ├── ClientListener.class
-│   │   │       ├── ClientListener.java
-│   │   │       ├── ClientThreader.class
-│   │   │       ├── ClientThreader.java
-│   │   │       ├── WatcherRunnable.class
-│   │   │       └── WatcherRunnable.java
-│   │   ├── store
-│   │   │   ├── FaultyTest2.properties
-│   │   │   └── backup
-│   │   │       ├── 1735751399317_backup_FaultyTest2.properties
-│   │   │       ├── 1735751418323_backup_FaultyTest2.properties
-│   │   │       └── 1735752107778_backup_SpecialChars.properties
-│   │   └── watched_directory
-│   ├── failed
-│   │   └── BasicTest.properties
-│   └── logs
-│       ├── client_log.txt
-│       └── server_logs.txt
-└── watch_dir_2
+`javac com/server/Client.java`
+`javac com/server/ServerLogic.java`
+`javac com/server/ServerThreader.java`
+`javac com/server/multiClient/ClientListener.java` 
+`javac com/server/multiClient/ClientThreader.java`
+`javac com/server/multiClient/WatcherRunnable.java`
