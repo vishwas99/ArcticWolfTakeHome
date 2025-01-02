@@ -58,6 +58,8 @@ public class ServerLogic implements Runnable {
             this.checkSum = calculateMapHash(map);
             // Process the Map
             boolean processSuccess = processClientMessage(map);
+            // Acknowledgement mode where the server sends an acknowledgment to the client on ack.port
+            // sendAcknowledgmentToAckPort(processSuccess, map.get("##FILENAME##"));
             sendAcknowledgment(processSuccess, map.get("##FILENAME##"));
 
         }
@@ -142,19 +144,29 @@ public class ServerLogic implements Runnable {
         }
     }
 
-    private void sendAcknowledgment(boolean success, String propFileName) throws NoSuchAlgorithmException {
+    private void sendAcknowledgmentToAckPort(boolean success, String propFileName) throws NoSuchAlgorithmException {
 
         int ackPort = Integer.parseInt(config.getProperty("ack.port", "9090"));
 
         try (Socket ackSocket = new Socket(config.getProperty("server.host"), ackPort);
                 PrintWriter ackOut = new PrintWriter(ackSocket.getOutputStream(), true)) {
-
-            Path filePath = Paths.get(this.config.getProperty("store.directory"), propFileName);
             // Build acknowledgment message
-            String acknowledgment = propFileName + "=" + (success ? this.checkSum : "Failure");
+            // String acknowledgment = propFileName + "=" + (success ? this.checkSum : "Failure");
+            String acknowledgment = propFileName + "=" + (success ? "Success" : "Failure");
             logToFile("Sending acknowledgment: " + acknowledgment);
             ackOut.println(acknowledgment); // Send acknowledgment to the new socket
 
+        } catch (IOException e) {
+            logToFile("Error sending acknowledgment: " + e.getMessage());
+        }
+    }
+
+    private void sendAcknowledgment(boolean success, String propFileName) {
+        try (PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true)) {
+            // Build acknowledgment message
+            String acknowledgment = propFileName + "=" + (success ? "Success" : "Failure");
+            logToFile("Sending acknowledgment: " + acknowledgment);
+            out.println(acknowledgment);  // Send acknowledgment to client
         } catch (IOException e) {
             logToFile("Error sending acknowledgment: " + e.getMessage());
         }

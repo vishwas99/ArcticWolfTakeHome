@@ -80,16 +80,25 @@ public class ClientListener implements Runnable {
         logToFile(clientChecksum, config);
         logToFile(serverChecksum, config);
         // Check if the message matches success or failure pattern
-        if (ackMessage.contains("Failure")) {
+        // if (ackMessage.contains("Failure")) {
 
-            logToFile("File processing failed. Moving file to failed folder: " + filePath, config);
-            moveFileToFailedFolder(filePath, config); // Move file to failed folder
-        } else if (clientChecksum.equals(serverChecksum)) {
+        //     logToFile("File processing failed. Moving file to failed folder: " + filePath, config);
+        //     moveFileToFailedFolder(filePath, config); // Move file to failed folder
+        // } else if (clientChecksum.equals(serverChecksum)) {
+        //     logToFile("File processed successfully. Deleting the file: " + serverMessage[0], config);
+        //     Files.delete(filePath); // Delete the file if acknowledgment is Success
+        // } else {
+        //     // Invalid Message, Loggin it
+        //     logToFile("Invalid acknowledgment message: " + ackMessage, config);
+        // }
+
+        // Revert to old logic to check success and failure
+        if(ackMessage.contains("Success")) {
             logToFile("File processed successfully. Deleting the file: " + serverMessage[0], config);
             Files.delete(filePath); // Delete the file if acknowledgment is Success
         } else {
-            // Invalid Message, Loggin it
-            logToFile("Invalid acknowledgment message: " + ackMessage, config);
+            logToFile("File processing failed. Moving file to failed folder: " + filePath, config);
+            moveFileToFailedFolder(filePath, config); // Move file to failed folder
         }
     }
 
