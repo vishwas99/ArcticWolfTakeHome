@@ -23,6 +23,7 @@ Server Contains 2 main Classes
  - if append.to.file is false, Old file will be completely overwritten by new file
  - backup.file is provided to make sure that if same file is being processed again then older version of it is timestamped and is backed up safely
  - A folder name 'backup' is created in the store.directory folder and files are saved in this format
+ - Server User blocking file locks to handle multiple client updates on same file, If File already exist in the Dir then its locked till processing is completed.
 
     `1735751399317_backup_FaultyTest2.properties`
 
